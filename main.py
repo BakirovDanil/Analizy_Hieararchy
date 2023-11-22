@@ -114,4 +114,6 @@ def MainForm(window):
 
 button = ttk.Button(text="Произвести расчет", command=Maths)
 button.place(x=400, y=25)
+button1 = ttk.Button(text="Заполнить матрицы", command=Maths)
+button1.place(x=570, y=25)
 MainForm(Frame)
