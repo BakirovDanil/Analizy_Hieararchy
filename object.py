@@ -4,8 +4,10 @@ from tkinter.messagebox import showerror
 
 
 def on_key_press(event):
-    if event.char.lower() not in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+    if event.char.lower() not in ['.','0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
                                   '\x08']:
+        return "break"
+    elif event.char == '.' in event.widget.get():
         return "break"
 
 
@@ -13,12 +15,12 @@ def proverka(m):
     found_invalid_value = False
     for i in range(len(m)):
         for j in range(len(m[i])):
-            if m[i][j].get() > 9 or m[i][j].get() == 0:
+            if m[i][j].get() > 10 or m[i][j].get() == 0:
                 found_invalid_value = True
                 m[i][j].set(0)
 
     if found_invalid_value:
-        showerror(title="Ошибка", message="Введенные данные некорректны. Одно из значений превышает 9")
+        showerror(title="Ошибка", message="Введенные данные некорректны. Одно из значений превышает 9 или равно нулю")
         for i in range(len(m)):
             for j in range(len(m[i])):
                 if i != j:
@@ -28,12 +30,6 @@ def proverka(m):
         return True
 
 
-def Raschet(m):
-    y = 0
-    summa = 0
-    if proverka(m):
-        for i in range(len(m)):
-            print()
 
 
 class Figure(ABC):

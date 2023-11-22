@@ -1,80 +1,109 @@
 from tkinter import *
 from tkinter import ttk
 
+import numpy as np
+
+import calculation
 import object
 
 Frame = Tk()
 # Значения для первой матрицы (по критериям)
-matrix_1_1 = IntVar()
+matrix_1_1 = DoubleVar()
 matrix_1_1.set(1)
-matrix_1_2 = IntVar()
-matrix_1_3 = IntVar()
-matrix_2_1 = IntVar()
-matrix_2_2 = IntVar()
+matrix_1_2 = DoubleVar()
+matrix_1_3 = DoubleVar()
+matrix_2_1 = DoubleVar()
+matrix_2_2 = DoubleVar()
 matrix_2_2.set(1)
-matrix_2_3 = IntVar()
-matrix_3_1 = IntVar()
-matrix_3_2 = IntVar()
-matrix_3_3 = IntVar()
+matrix_2_3 = DoubleVar()
+matrix_3_1 = DoubleVar()
+matrix_3_2 = DoubleVar()
+matrix_3_3 = DoubleVar()
 matrix_3_3.set(1)
 matrix_0 = [[matrix_1_1, matrix_1_2, matrix_1_3],
             [matrix_2_1, matrix_2_2, matrix_2_3],
             [matrix_3_1, matrix_3_2, matrix_3_3]]
 
 # значения для второй матрицы (по альтернативам и первому критерию)
-matrix1_1_1 = IntVar()
+matrix1_1_1 = DoubleVar()
 matrix1_1_1.set(1)
-matrix1_1_2 = IntVar()
-matrix1_1_3 = IntVar()
-matrix1_2_1 = IntVar()
-matrix1_2_2 = IntVar()
+matrix1_1_2 = DoubleVar()
+matrix1_1_3 = DoubleVar()
+matrix1_2_1 = DoubleVar()
+matrix1_2_2 = DoubleVar()
 matrix1_2_2.set(1)
-matrix1_2_3 = IntVar()
-matrix1_3_1 = IntVar()
-matrix1_3_2 = IntVar()
-matrix1_3_3 = IntVar()
+matrix1_2_3 = DoubleVar()
+matrix1_3_1 = DoubleVar()
+matrix1_3_2 = DoubleVar()
+matrix1_3_3 = DoubleVar()
 matrix1_3_3.set(1)
 matrix_1 = [[matrix1_1_1, matrix1_1_2, matrix1_1_3],
             [matrix1_2_1, matrix1_2_2, matrix1_2_3],
             [matrix1_3_1, matrix1_3_2, matrix1_3_3]]
 
 # значения для третьей матрицы (по альтернативам и второму критерию)
-matrix2_1_1 = IntVar()
+matrix2_1_1 = DoubleVar()
 matrix2_1_1.set(1)
-matrix2_1_2 = IntVar()
-matrix2_1_3 = IntVar()
-matrix2_2_1 = IntVar()
-matrix2_2_2 = IntVar()
+matrix2_1_2 = DoubleVar()
+matrix2_1_3 = DoubleVar()
+matrix2_2_1 = DoubleVar()
+matrix2_2_2 = DoubleVar()
 matrix2_2_2.set(1)
 matrix2_2_3 = IntVar()
-matrix2_3_1 = IntVar()
-matrix2_3_2 = IntVar()
-matrix2_3_3 = IntVar()
+matrix2_3_1 = DoubleVar()
+matrix2_3_2 = DoubleVar()
+matrix2_3_3 = DoubleVar()
 matrix2_3_3.set(1)
 matrix_2 = [[matrix2_1_1, matrix2_1_2, matrix2_1_3],
             [matrix2_2_1, matrix2_2_2, matrix2_2_3],
             [matrix2_3_1, matrix2_3_2, matrix2_3_3]]
 
 # значения для четвертой матрицы (по альтернативам и третьему критерию)
-matrix3_1_1 = IntVar()
+matrix3_1_1 = DoubleVar()
 matrix3_1_1.set(1)
-matrix3_1_2 = IntVar()
-matrix3_1_3 = IntVar()
-matrix3_2_1 = IntVar()
-matrix3_2_2 = IntVar()
+matrix3_1_2 = DoubleVar()
+matrix3_1_3 = DoubleVar()
+matrix3_2_1 = DoubleVar()
+matrix3_2_2 = DoubleVar()
 matrix3_2_2.set(1)
-matrix3_2_3 = IntVar()
-matrix3_3_1 = IntVar()
-matrix3_3_2 = IntVar()
-matrix3_3_3 = IntVar()
+matrix3_2_3 = DoubleVar()
+matrix3_3_1 = DoubleVar()
+matrix3_3_2 = DoubleVar()
+matrix3_3_3 = DoubleVar()
 matrix3_3_3.set(1)
 matrix_3 = [[matrix3_1_1, matrix3_1_2, matrix3_1_3],
             [matrix3_2_1, matrix3_2_2, matrix3_2_3],
             [matrix3_3_1, matrix3_3_2, matrix3_3_3]]
 
 
+def Zapolnenie():
+    matrix_2_1.set(1 / matrix_1_2.get())
+    matrix_3_1.set(1 / matrix_1_3.get())
+    matrix_3_2.set(1 / matrix_2_3.get())
+    #
+    matrix1_2_1.set(1 / matrix1_1_2.get())
+    matrix1_3_1.set(1 / matrix1_1_3.get())
+    matrix1_3_2.set(1 / matrix1_2_3.get())
+    #
+    matrix2_2_1.set(1 / matrix2_1_2.get())
+    matrix2_3_1.set(1 / matrix2_1_3.get())
+    matrix2_3_2.set(1 / matrix2_2_3.get())
+    #
+    matrix3_2_1.set(1 / matrix3_1_2.get())
+    matrix3_3_1.set(1 / matrix3_1_3.get())
+    matrix3_3_2.set(1 / matrix3_2_3.get())
+
+
 def Maths():
-    object.Raschet(matrix_0)
+    massiv1 = calculation.sum_of_rows(matrix_0)
+    massiv2 = calculation.sum_of_rows(matrix_1)
+    massiv3 = calculation.sum_of_rows(matrix_2)
+    massiv4 = calculation.sum_of_rows(matrix_3)
+    massiv_xx = np.hstack((massiv2, massiv3, massiv4))
+    massiv_xx = np.dot(massiv_xx, massiv1)
+    print("Матрица приоритетов это: ")
+    print(massiv_xx)
+
 
 
 def Finish():
@@ -114,6 +143,6 @@ def MainForm(window):
 
 button = ttk.Button(text="Произвести расчет", command=Maths)
 button.place(x=400, y=25)
-button1 = ttk.Button(text="Заполнить матрицы", command=Maths)
+button1 = ttk.Button(text="Заполнить матрицы", command=Zapolnenie)
 button1.place(x=570, y=25)
 MainForm(Frame)
