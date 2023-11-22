@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import ttk
 
+import object
+
 Frame = Tk()
 # Значения для первой матрицы
 matrix_1_1 = IntVar().set(1)
@@ -26,6 +28,8 @@ def MainForm(window):
     window.geometry("800x600+400+200")
     window.resizable(False, False)
     window.protocol("WM_DELETE_WINDOW", Finish)
+    label = object.Label()
+    label.Sozdanie(window)
     window.mainloop()
 
 
