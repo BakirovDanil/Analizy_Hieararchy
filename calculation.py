@@ -29,6 +29,8 @@ def sum_of_rows(matrix):
         vector2 = row_sum2 / summa
         vector3 = row_sum3 / summa
         massiv = np.array([[vector1], [vector2], [vector3]])
+        print("Вектор приоритетов:")
+        print(massiv)
         for i in range(len(matrix)):
             for j in range(len(massiv[0])):
                 for k in range(len(massiv)):
@@ -46,9 +48,9 @@ def sum_of_rows(matrix):
                     z3 = result_vector[i][j] / vector3
         summa2 = 1/3*(z1+z2+z3)
         IS = (summa2 - 3) / (3 - 1)
-        print(IS)
+        print("ИС" + str(IS))
         OS = IS/0.58
-        print(OS)
+        print("ИС" + str(OS))
         if OS > 0.1:
             showerror(title="Ошибка", message="ОС одной из матриц выше нормативного")
         else:
